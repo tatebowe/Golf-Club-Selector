@@ -1,0 +1,9 @@
+//golf club selector - club distances
+import math
+driver = range(230,275)
+three_Wood = range(220, 250)
+hybrid = range(200, 220)
+iron4 = range(190,200)
+iron5 = range(180,190)
+
+return math.randomint(driver)
