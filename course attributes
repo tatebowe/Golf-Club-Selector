@@ -1,0 +1,37 @@
+# course attributes, hole will build off of course, adjust power and accuracy based on lie, grass. 
+# lie will compose of:
+# above/below feet
+# uphill/downhill
+#
+#grain
+
+
+class Course:
+	def __init__(self, name, num_holes, par, *tees, grass_type, rating, slope_rating):
+		self.holes = num_holes
+		self.par = par
+		self.grass = grass_type
+		self.slope = slope_rating
+		
+		
+class Lie:
+	def TeeBox:
+		pass
+	
+	def Fairway:
+		pass
+	
+	def Rough:
+		pass
+
+	def Fescue:
+		pass
+	
+	def Green:
+		pass
+
+	def Hazard (white_stake, red_stake):
+		pass
+
+class Hole(Course):
+	pass
