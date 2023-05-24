@@ -1,9 +1,32 @@
-//golf club selector - club distances
-import math
-driver = range(230,275)
-three_Wood = range(220, 250)
-hybrid = range(200, 220)
-iron4 = range(190,200)
-iron5 = range(180,190)
+def get_distance(club):
+    club_distance = input(f"Enter average distance for {club}, or 's' to skip: ")
+    if club_distance == 's':
+        return None
+    try:
+        distance = int(club_distance)
+        return distance
+    except ValueError:
+        print("You must enter a valid integer")
+        distance = get_distance(club)
+        return distance
 
-return math.randomint(driver)
+def get_loft(club):
+    club_loft = input(f"Enter loft for {club}: ")
+    try:
+        loft = int(club_loft)
+        return loft
+    except ValueError:
+        print("You must enter a valid integer")
+        loft = get_loft(club)
+        return loft
+
+clubs = ['driver', '3 wood', '5 wood', '7 wood', '3 iron', '4 iron', '5 iron', '6 iron', '7 iron', '8 iron', '9 iron', 'pitching wedge', 'gap wedge', '52', '54', '56', '58', '60', '62']
+club_dict = {}
+for club in clubs:
+    dist = get_distance(club)
+    if dist is None:
+        continue
+    loft = get_loft(club)
+    club_dict[club] = [dist, loft]
+
+print(club_dict)
