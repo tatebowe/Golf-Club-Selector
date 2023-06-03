@@ -1,0 +1,26 @@
+## holes will be nodes, values will be par, yardage,  maybe hazards
+
+class Hole:
+  def __init__(self, par, yard, next_hole=None, prev_hole=None):
+    self.par = par
+    self.yard = yards
+    self.next_hole = next_hole
+    self.prev_hole = prev_hole
+    
+  def set_next_hole(self, next_hole):
+    self.next_hole = next_hole
+    
+  def get_next_hole(self):
+    return self.next_hole
+
+  def set_prev_hole(self, prev_hole):
+    self.prev_hole = prev_hole
+    
+  def get_prev_hole(self):
+    return self.prev_hole
+  
+  def get_par(self):
+    return self.par
+
+  def get_yards(self):
+    return self.yard
