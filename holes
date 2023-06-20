@@ -1,9 +1,10 @@
 ## holes will be nodes, values will be par, yardage,  maybe hazards
 
 class Node:
-  def __init__(self, par, yards, next_node=None, prev_node=None):
-    self.par = par
-    self.yard = yards
+  def __init__(self, name, next_node=None, prev_node=None):
+    self.name = name
+    self.par = None
+    self.yard = None
     self.next_node = next_node
     self.prev_node = prev_node
     
@@ -114,3 +115,11 @@ class DoublyLinkedList:
       prev_node.set_next_node(next_node)
 
     return node_to_remove
+  
+
+test_course = DoublyLinkedList()
+test_course.add_to_head('Hole 1')
+print(test_course.head_node.name)
+for i in range(2, 19):
+  test_course.add_to_tail(f'Hole {i}'.format(i))
+  print(test_course.tail_node.name)
