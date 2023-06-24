@@ -20,15 +20,17 @@ class Node:
   def get_prev_node(self):
     return self.prev_node
   
-  def get_par(self):
-    return self.par
+  def get_par(self, value):
+    return self.par == value
 
-  def get_yards(self):
-    return self.yard
+  def get_yards(self, value):
+    return self.yard == value
 
 
 class DoublyLinkedList:
-  def __init__(self):
+  def __init__(self, name, num_holes):
+    self.name = name
+    self.num_holes = num_holes
     self.head_node = None
     self.tail_node = None
   
@@ -117,9 +119,31 @@ class DoublyLinkedList:
     return node_to_remove
   
 
-test_course = DoublyLinkedList()
-test_course.add_to_head('Hole 1')
-print(test_course.head_node.name)
-for i in range(2, 19):
-  test_course.add_to_tail(f'Hole {i}'.format(i))
-  print(test_course.tail_node.name)
+class Course(DoublyLinkedList):
+  def __init__(self, name = None, holes = None):
+    self.name = name
+    self.holes = holes
+    self.course = None
+
+
+  def get_course_info(self):
+    self.name = input('Which course are you playing? ')
+    try:
+      self.holes = int(input('How many holes are there? '))
+    except ValueError:
+      print('Please enter a valid number')
+  
+    self.course = DoublyLinkedList(self.name, self.holes)
+    return self.course
+  
+  def fill_course(self):
+
+    self.course.add_to_head('Hole 1')
+
+    for i in range(2, self.holes):
+      self.course.add_to_head(f'Hole {i}'.format(i))
+
+    return self.course
+test_course = Course()
+test_course.get_course_info()
+test_course.fill_course()
