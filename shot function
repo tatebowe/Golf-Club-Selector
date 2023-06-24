@@ -2,8 +2,10 @@ def shots():
     shots = {}
     score = 0
     choices = range(1, 6)
+    options = ['green', 'fairway', 'rough', 'hazard', 'heavy stuff']
     while True:
-        print('Result?')
+        print('Hitting shot...\n')
+        print('Result? \n')
         try:
             result = int(input('''Enter... \n1 for green
         \n2 for fairway
@@ -14,6 +16,7 @@ def shots():
             print('Please enter a number 1-5')
 
         if result in choices:
+            print(f'You hit the {options[result-1]}\n'.format(options))
             club = input('Which club did you hit? ')
             distance = input(f'How far did your {club} go? '.format(club))
             shots[club] = distance
