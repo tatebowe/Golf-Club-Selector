@@ -15,7 +15,7 @@ def shots():
 
         if result in choices:
             club = input('Which club did you hit? ')
-            distance = input(f'How far did {club} go? '.format(club))
+            distance = input(f'How far did your {club} go? '.format(club))
             shots[club] = distance
             if result == 1:
                 score += 1
@@ -33,7 +33,7 @@ def shots():
     shots['putter'] = putts
     score += putts
  
-    return print(f'Your score was: {score}'.format(score), shots)
+    return print(f'Your score was: {score}\n'.format(score), shots)
 
 
 shots()
