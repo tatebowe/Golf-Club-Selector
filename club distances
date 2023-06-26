@@ -5,6 +5,7 @@ class Club:
         self.name = name
         self.yards = None
         self.loft = None
+        club_range = []
     
     def get_yards(self):
         try:
@@ -40,3 +41,5 @@ gwedge = Club('Gap Wedge')
 for x in range(50, 64, 2):
     wedge = Club(f'{x}-degree Wedge'.format(x))
     wedge.loft = x
+
+
