@@ -11,26 +11,31 @@ def shots():
         \n4 for hazard
         \n5 for heavy stuff\n\n'''))
         except ValueError:
-            print('Please enter a number 1-5')
-
-        if result in range(1, len(options)):
-            print(f'You hit the {options[result-1]}\n'.format(options))
-            club = input('Which club did you hit? ')
-            distance = input(f'How far did your {club} go? '.format(club))
-            shots[club] = distance
-            if result == 1:
-                score += 1
-                break
-            elif result == 2:
-                score += 1
-            elif result == 3:
-                score += 1
-            elif result == 4:
-                score += 2
-            elif result == 5:
-                score += 1
-        else:
-            print('Please enter a number 1-5')
+            print('\n***Please enter a number 1-5***')
+            result = int(input('''\nFor shot result enter...\n \n1 for green
+        \n2 for fairway
+        \n3 for rough
+        \n4 for hazard
+        \n5 for heavy stuff\n\n'''))
+        finally:
+            if result in range(1, len(options)):
+                print(f'You hit the {options[result-1]}\n'.format(options))
+                club = input('Which club did you hit? ')
+                distance = input(f'How far did your {club} go? '.format(club))
+                shots[club] = distance
+                if result == 1:
+                    score += 1
+                    break
+                elif result == 2:
+                    score += 1
+                elif result == 3:
+                    score += 1
+                elif result == 4:
+                    score += 2
+                elif result == 5:
+                    score += 1
+            else:
+                print('\n***Please enter a number 1-5***')
 
     putts = int(input('How many putts did you have? '))
     shots['putter'] = putts
