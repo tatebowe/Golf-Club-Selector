@@ -1,3 +1,5 @@
+#club attributes, name, average yards. clubs are instantiated by user. make bag a hashmap.
+
 class Club:
     def __init__(self, name):
         self.name = name
@@ -27,13 +29,14 @@ class Club:
         
 driver = Club('Driver')
 for x in range(3, 8, 2):
-    woodx = Club(f'{x}-Wood'.format(x))
+    wood = Club(f'{x}-Wood'.format(x))
+
 hybrid3 = Club('3-Hybrid')
 hybrid4 = Club('4-Hybrid')
 for x in range(1, 10):
-    ironx = Club(f'{x}-iron'.format(x))
+    iron = Club(f'{x}-iron'.format(x))
 pwedge = Club('Pitching Wedge')
 gwedge = Club('Gap Wedge')
 for x in range(50, 64, 2):
-    wedgex = Club(f'{x}-degree Wedge'.format(x))
-    wedgex.loft = x
+    wedge = Club(f'{x}-degree Wedge'.format(x))
+    wedge.loft = x
