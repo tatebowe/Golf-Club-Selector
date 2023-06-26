@@ -1,21 +1,19 @@
 def shots():
     shots = {}
     score = 0
-    choices = range(1, 6)
     options = ['green', 'fairway', 'rough', 'hazard', 'heavy stuff']
     while True:
-        print('Hitting shot...\n')
-        print('Result? \n')
+        print('\n\nHitting shot...\n')
         try:
-            result = int(input('''Enter... \n1 for green
+            result = int(input('''\nFor shot result enter...\n \n1 for green
         \n2 for fairway
         \n3 for rough
         \n4 for hazard
-        \n5 for heavy stuff\n'''))
+        \n5 for heavy stuff\n\n'''))
         except ValueError:
             print('Please enter a number 1-5')
 
-        if result in choices:
+        if result in range(1, len(options)):
             print(f'You hit the {options[result-1]}\n'.format(options))
             club = input('Which club did you hit? ')
             distance = input(f'How far did your {club} go? '.format(club))
@@ -31,6 +29,8 @@ def shots():
                 score += 2
             elif result == 5:
                 score += 1
+        else:
+            print('Please enter a number 1-5')
 
     putts = int(input('How many putts did you have? '))
     shots['putter'] = putts
