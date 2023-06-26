@@ -1,7 +1,8 @@
 def shots():
     shots = {}
-    score = 0
+    strokes = []
     options = ['green', 'fairway', 'rough', 'hazard', 'heavy stuff']
+    total = 0
     while True:
         print('\n\nHitting shot...\n')
         try:
@@ -9,39 +10,49 @@ def shots():
         \n2 for fairway
         \n3 for rough
         \n4 for hazard
-        \n5 for heavy stuff\n\n'''))
+        \n5 for heavy stuff
+        \n6 to remove last shot\n'''))
         except ValueError:
             print('\n***Please enter a number 1-5***')
             result = int(input('''\nFor shot result enter...\n \n1 for green
         \n2 for fairway
         \n3 for rough
         \n4 for hazard
-        \n5 for heavy stuff\n\n'''))
+        \n5 for heavy stuff
+        \n6 to remove last shot\n'''))
         finally:
-            if result in range(1, len(options)):
-                print(f'You hit the {options[result-1]}\n'.format(options))
+            if result in range(1, 6):
+                lie = options[result-1]
+                print(f'You hit the {lie}\n'.format(lie))
                 club = input('Which club did you hit? ')
                 distance = input(f'How far did your {club} go? '.format(club))
-                shots[club] = distance
                 if result == 1:
-                    score += 1
+                    shots[club] = [distance, lie, 1]
+                    strokes.append(1)
                     break
                 elif result == 2:
-                    score += 1
+                    stroke = 1
                 elif result == 3:
-                    score += 1
+                    stroke = 1
                 elif result == 4:
-                    score += 2
+                    stroke = 2
                 elif result == 5:
-                    score += 1
+                    stroke = 1
+                shots[club] = [distance, lie, stroke]
+                strokes.append(stroke)
+            elif result == 6:
+                removed_shot = shots.popitem()
+                removed_strokes = strokes.pop()
+                print(f'Removing previous shot: {removed_shot} and score: {removed_strokes}'.format(removed_shot, removed_strokes))
             else:
                 print('\n***Please enter a number 1-5***')
 
     putts = int(input('How many putts did you have? '))
     shots['putter'] = putts
-    score += putts
- 
-    return print(f'Your score was: {score}\n'.format(score), shots)
-
+    strokes.append(putts)
+    for i in strokes:
+        total += i
+    
+    return print(f'Your score was: {total}\n'.format(total), shots)
 
 shots()
