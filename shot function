@@ -30,24 +30,12 @@ def shot_func(shots = None, strokes = None):
                 if result == 1:
                     shots[club] = [distance, lie, 1]
                     strokes.append(1)
-                    try:
-                        putts = int(input('How many putts did you have? '))
-                    except ValueError: 
-                            print('\n***Please enter a valid number***')
-                            putts = int(input('How many putts did you have? '))
-                    finally:
-                        shots['putter'] = putts
-                        strokes.append(putts)
-                        break
+                    break
 
-                elif result == 2:
-                    stroke = 1
-                elif result == 3:
+                elif result == 2 or result == 3 or result == 5:
                     stroke = 1
                 elif result == 4:
                     stroke = 2
-                elif result == 5:
-                    stroke = 1
                 shots[club] = [distance, lie, stroke]
                 strokes.append(stroke)
             elif result == 6:
@@ -55,13 +43,22 @@ def shot_func(shots = None, strokes = None):
                 removed_strokes = strokes.pop()
                 print(f'Removing previous shot: {removed_shot} and strokes: {removed_strokes}'.format(removed_shot, removed_strokes))
         
-
-    # putts = int(input('How many putts did you have? '))
-    # shots['putter'] = putts
-    # strokes.append(putts)
     for i in strokes:
         total += i
     
-    return print(f'Your score was: {total}\n'.format(total), shots)
+    return shots, strokes
 ## maybe make a putt function to handle valueerrors similarly. then a hole can be shot_func and putt_func
 shot_func()
+
+def putt_func(shots, strokes):
+    shot_func()
+    try:
+        putts = int(input('How many putts did you have? '))
+    except ValueError: 
+            print('\n***Please enter a valid number***')
+            putt_func()
+    finally:
+        shots['putter'] = putts
+        strokes.append(putts)
+
+    return print(f'Your score was: {strokes} and your hole looked like: {shots}'.format(strokes, shots))
