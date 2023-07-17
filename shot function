@@ -1,4 +1,13 @@
-##consider making shot class with add and remove shot functions
+#get valid input function reduces repetition and cleans up functions by filtering user input, shot func add/removes shots and strokes until reaching green, then putt function adds putts and strokes, play hole function plays a single hole.
+def get_input(prompt, options):
+    while True:
+        try:
+            result = int(input(prompt))
+            if result in options:
+                return result
+            print('Please enter a valid number 1-6')
+        except ValueError:
+            print('Please enter a valid number 1-6')
 
 def shot_func(shots = None, strokes = None):
     if shots is None:
@@ -7,58 +16,60 @@ def shot_func(shots = None, strokes = None):
         strokes = []
     options = ['green', 'fairway', 'rough', 'hazard', 'heavy stuff']
     total = 0
+    result = None
     while True:
-        print('\n\nHitting shot...\n')
-        try:
-            result = int(input('''\nFor shot result enter...\n \n1 for green
+        result = get_input('\n\nHitting shot...\n'
+        '''\nFor shot result enter...\n \n1 for green
         \n2 for fairway
         \n3 for rough
         \n4 for hazard
         \n5 for heavy stuff
-        \n6 to remove last shot\n'''))
-        
-        except ValueError:
-            print('\n***Please enter a number 1-6***')
-            shot_func(shots, strokes)
+        \n6 to remove last shot\n''', range(1,7))
 
-        finally:
-            if result in range(1, 6):
-                lie = options[result-1]
-                print(f'You hit the {lie}\n'.format(lie))
-                club = input('Which club did you hit? ')
-                distance = input(f'How far did your {club} go? '.format(club))
-                if result == 1:
-                    shots[club] = [distance, lie, 1]
-                    strokes.append(1)
-                    break
-
-                elif result == 2 or result == 3 or result == 5:
-                    stroke = 1
-                elif result == 4:
-                    stroke = 2
-                shots[club] = [distance, lie, stroke]
-                strokes.append(stroke)
-            elif result == 6:
+        if result == 6:
+            if shots:
                 removed_shot = shots.popitem()
                 removed_strokes = strokes.pop()
                 print(f'Removing previous shot: {removed_shot} and strokes: {removed_strokes}'.format(removed_shot, removed_strokes))
-        
-    for i in strokes:
-        total += i
-    
-    return shots, strokes
-## maybe make a putt function to handle valueerrors similarly. then a hole can be shot_func and putt_func
-shot_func()
+            else:
+                print('You do not currently have any shots.')
+        else:
+            lie = options[result-1]
+            print(f'You hit the {lie}\n')
+            club = input('Which club did you hit? ')
+            distance = input(f'How far did your {club} go? ')
+            if result == 1:
+                shots[club] = [distance, lie, 1]
+                strokes.append(1)
+                break
 
-def putt_func(shots, strokes):
-    shot_func()
+            elif result in [2, 3, 5]:
+                stroke = 1
+                strokes.append(1)
+            else:
+                strokes.append(2)
+                stroke = 2
+            shots[club] = [distance, lie, stroke]
+
+        
+
+    return shots, sum(strokes)  
+
+
+def putt_func():
     try:
         putts = int(input('How many putts did you have? '))
+        return {'putter': putts}, putts
     except ValueError: 
             print('\n***Please enter a valid number***')
-            putt_func()
-    finally:
-        shots['putter'] = putts
-        strokes.append(putts)
+            return putt_func()
 
-    return print(f'Your score was: {strokes} and your hole looked like: {shots}'.format(strokes, shots))
+def play_hole():
+    shots, strokes = shot_func()  
+    putts, putter_strokes = putt_func()
+    shots.update(putts)
+    strokes += putter_strokes
+
+    return print(f'Your score was: {strokes} and your hole looked like: {shots}')
+
+play_hole()
