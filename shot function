@@ -9,14 +9,11 @@ def get_input(prompt, options):
         except ValueError:
             print('Please enter a valid number 1-6')
 
-def shot_func(shots = None, strokes = None):
-    if shots is None:
-        shots = {}
-    if strokes is None:
-        strokes = []
+def shot_func():
+    shots = {}
+    strokes = []
     options = ['green', 'fairway', 'rough', 'hazard', 'heavy stuff']
-    total = 0
-    result = None
+    
     while True:
         result = get_input('\n\nHitting shot...\n'
         '''\nFor shot result enter...\n \n1 for green
